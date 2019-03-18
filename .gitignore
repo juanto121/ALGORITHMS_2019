@@ -1,3 +1,6 @@
+.idea/
+*.iml
+library/out
 codeforces/.idea/
 codeforces/CODEFORCES.iml
 codeforces/out/
