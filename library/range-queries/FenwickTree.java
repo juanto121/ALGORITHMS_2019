@@ -21,6 +21,11 @@ public class FenwickTree {
  * update: O(log n)
  * query: O(log n)
  *
+ * NOT good if range is updated using a range.
+ * Good if single point updates
+ *
+ * NOT good if function to evaluate over range is not "invertible" (max and min are not, sum and subtraction are)
+ *
  * Remember this:
  * Each position has a responsibility equals to the lowest bit set to 1.
  * position  table responsibility  updates       queries
@@ -30,7 +35,7 @@ public class FenwickTree {
  * 4          100   4      |       4             4
  * 5          101   1 |  |         5 and 6       5 and 4
  * 6          110   2    |         6             6 and 4
- * 7          111   1 |            7             7
+ * 7          111   1 |            7             7, 6 and 4
  *
  ****/
 
