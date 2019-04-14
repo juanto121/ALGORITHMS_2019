@@ -2,6 +2,8 @@ public class FenwickTree {
 
   public static void main(String[] args) {
     int a[] = {7,6,2,3,1,4,5};
+
+    System.out.println(Math.sqrt(99400891));
     BinaryIndexedTree bit = new BinaryIndexedTree(a.length);
     for(int i = 1; i <= a.length; i++) {
       bit.update(i, a[i-1]);
