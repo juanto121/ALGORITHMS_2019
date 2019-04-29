@@ -10,10 +10,11 @@
 public class SparseTable {
 
   public static void main(String[] args) {
-    int arr[] = {14,2,5,3,2,4,6,7,23,-2,54,2};
+    int arr[] = {14,103,5,3,2,4,6,7,23,-2,54,89};
+    //int arr[] = {-14,-2,-5,-3,-2,-4,-6,-7,-23,-54,-2};
     int[][] rmq = process(arr);
 
-    System.out.println(arr[query(rmq, arr, 0, 11)]);
+    System.out.println(arr[query(rmq, arr, 0, 1)]);
   }
 
   // returns the minimum between low and high inclusive using rmq[][] as representation for original array a[].
@@ -21,7 +22,7 @@ public class SparseTable {
     int k = log2(high-low); //length of the range
     int x = rmq[k][low];
     int y = rmq[k][high - (1<<k) + 1];
-    return a[x] <= a[y] ? x : y;
+    return a[x] > a[y] ? x : y;
   }
 
 /*
@@ -40,7 +41,7 @@ public class SparseTable {
       for(int i = 0; i + (1 << k) <= n; i++) {
         int x = rmq[k-1][i];
         int y = rmq[k-1][i+(1<<k-1)];
-        rmq[k][i] = a[x] <= a[y] ? x:y;
+        rmq[k][i] = a[x] > a[y] ? x:y;
       }
     }
 
