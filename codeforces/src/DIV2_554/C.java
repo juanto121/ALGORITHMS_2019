@@ -14,7 +14,8 @@ public class C {
     int a = scan.nextInt();
     int b = scan.nextInt();
     int min = Integer.MAX_VALUE;
-    for(int k = 0; k < 120; k++) {
+    for(int k = 1986; k < 1987; k++) {
+
       System.out.println((a+k)+" "+(b+k)+" "+gcd(a+k, b+k) + " "+ ((a+k)*(b+k)/gcd(a+k,b+k)));
     }
   }
