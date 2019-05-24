@@ -1,17 +1,12 @@
 import java.util.Arrays;
 
+@SuppressWarnings("ALL")
 public class Quicksort {
     public static void main(String[] args) {
-        //int a[] = {5,4,3,2,1};
-        //int a[] = {5,4};
-        int a[] = {1,2,3,6,87,1,2,1};
-        //int a[] = {1,2,3,6,67,87,68,32,4609,87,67,31,55,68,99,33,5,3,2,345,6};
+        int a[] = {1,2,3,6,67,87,68,32,4609,87,67,31,55,68,99,33,5,3,2,345,6};
         quickSort(a,0, a.length-1);
         qsort(a, 0, a.length-1);
         System.out.println(Arrays.toString(a));
-        int b[] = {1,2,3,6,67,87,68,32,4609,87,67,31,55,68,99,33,5,3,2,345,6};
-        quickSort(b, 0, b.length-1);
-        //System.out.println(Arrays.toString(b));
     }
     private static void qsort(int[] a, int left, int right) {
         if(left < right) {
@@ -23,7 +18,6 @@ public class Quicksort {
     }
 
     private static void printarr(int[] a, int partition) {
-
         for(int i = 0; i <  a.length; i++){
             if(i==partition)
                 System.out.print("["+a[i]+"]" + " ");
