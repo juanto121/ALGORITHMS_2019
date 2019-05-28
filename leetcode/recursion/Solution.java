@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.Stack;
 
 public class Solution {
 
-  public Boolean removeInvalidParentheses(String s) {
+  public Boolean checkValidSolution(String s) {
     String valid = removeInvalidParenthesesString(s);
     GenerateAllValidSolutions solutions = new GenerateAllValidSolutions();
     solutions.removeAllInvalidParentheses(s);
@@ -15,7 +16,6 @@ public class Solution {
 
   public String removeInvalidParenthesesString(String s) {
     List<Expression> original = buildOriginal(s);
-    StringBuilder result = new StringBuilder();
     Stack<Expression> stack = new Stack<>();
     int len = s.length();
 
@@ -71,44 +71,66 @@ public class Solution {
 
   @Test
   public void test() {
-    System.out.println(removeInvalidParentheses("((a))"));
+    Assert.assertEquals(true, checkValidSolution("((a))"));
+    Assert.assertEquals(true, checkValidSolution(""));
   }
 
   @Test
   public void testInvalid() {
-    System.out.println(removeInvalidParentheses("(((()())"));
+    Assert.assertEquals(true, checkValidSolution("(((()())"));
   }
 
   @Test
   public void testInvalid2() {
-    System.out.println(removeInvalidParentheses("(((("));
+    Assert.assertEquals(true, checkValidSolution("(((("));
   }
 
   @Test
   public void testInvalid3() {
-    System.out.println(removeInvalidParentheses("()())()"));
+    Assert.assertEquals(true, checkValidSolution("()())()"));
   }
 
   @Test
   public void testInvalid4() {
-    System.out.println(removeInvalidParentheses("((()("));
+    Assert.assertEquals(true, checkValidSolution("((()("));
   }
 
   @Test
   public void testInvalid6() {
-    System.out.println(removeInvalidParentheses(")("));
+    Assert.assertEquals(true, checkValidSolution(")("));
   }
 
 
   @Test
   public void testInvalid7() {
-    System.out.println(removeInvalidParentheses(")("));
+    Assert.assertEquals(true, checkValidSolution(")("));
   }
 
 
   @Test
   public void testInvalid8() {
-    System.out.println(removeInvalidParentheses(")(()()())()(()(()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())()(()(()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())(()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())(()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()(((((()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()())())(()(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())(()()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())()()()("));
+    Assert.assertEquals(true, checkValidSolution(")(()()())()(()((()()()("));
+    Assert.assertEquals(true, checkValidSolution("(((((((("));
+    Assert.assertEquals(true, checkValidSolution("(((((((()"));
+    Assert.assertEquals(true, checkValidSolution("))))))))"));
+    Assert.assertEquals(true, checkValidSolution("))))))))("));
+  }
+
+  @Test
+  public void testInvalid9() {
+    Assert.assertEquals(true, checkValidSolution(")"));
+    Assert.assertEquals(true, checkValidSolution("("));
+    Assert.assertEquals(true, checkValidSolution(")("));
+    Assert.assertEquals(true, checkValidSolution("))(("));
+    Assert.assertEquals(true, checkValidSolution("(("));
+    Assert.assertEquals(true, checkValidSolution("))"));
   }
 
 }
