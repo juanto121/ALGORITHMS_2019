@@ -1,7 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class ThreeSum {
 
     public int threeSumClosest(List<Integer> A, int B) {
-        return sumthreev2(A, B);
+        return sumthreev3(A, B);
     }
 
     //O(N^2 * log(N) + N*Log(N))
@@ -19,14 +18,12 @@ public class ThreeSum {
         int minSumSoFar = Integer.MAX_VALUE;
         int minDiff = Integer.MAX_VALUE;
         for(int i = 0; i < len; i++) {
-            for(int j = 0; j < len; j++) {
-                if(i != j){
-                    int partialSum = A.get(i) + A.get(j);
-                    int sum = partialSum + findClosest(A, B, partialSum, i, j);
-                    if(minDiff > Math.abs(sum-B)) {
-                        minSumSoFar = sum;
-                        minDiff = Math.abs(sum-B);
-                    }
+            for(int j = i + 1; j < len; j++) {
+                int partialSum = A.get(i) + A.get(j);
+                int sum = partialSum + findClosest(A, B, partialSum, i, j);
+                if(minDiff > Math.abs(sum-B)) {
+                    minSumSoFar = sum;
+                    minDiff = Math.abs(sum-B);
                 }
             }
         }
@@ -35,34 +32,40 @@ public class ThreeSum {
 
     public int findClosest(List<Integer> A, int target, int partialSum, int first, int second) {
         int diff = target - partialSum;
-        System.out.println("sum: " + partialSum+" ");
-        A.remove(first);
-        A.remove(second-1);
-        int closestIndexToDiff = binarySearch(A, 0, A.size()-1, diff, Integer.MAX_VALUE, -1);
+        //System.out.print("sum: " + partialSum + " ");
+        int closestIndexToDiff = binarySearch(A, diff, first, second);
+        //System.out.print("diff: " + diff + " found: " + A.get(closestIndexToDiff) + "\n");
         return A.get(closestIndexToDiff);
     }
 
-    public int binarySearch(List<Integer> A, int low, int high, int search, int minDiff, int index) {
-        if(low < high) {
-            int mid = (low + high) / 2;
-            int foundDiff = Math.abs(A.get(mid)-search);
-            System.out.println("mid: " + A.get(mid) + " diff: " + foundDiff);
-            if( foundDiff < minDiff ) {
-                minDiff = foundDiff;
-                index = mid;
-            }
+    public int binarySearch(List<Integer> A, int n, int first, int second) {
+
+        int left = first+1;
+        int right = second-1;
+
+        while(left <= right) {
+            int mid =  (left + right) / 2;
             int midVal = A.get(mid);
-            if(midVal == search) return mid;
-            else {
-                if(search < midVal) {
-                    return binarySearch(A, low, mid, search, minDiff, index);
-                } else {
-                    return binarySearch(A, mid+1, high, search, minDiff, index);
-                }
+            if(midVal == n) return mid;
+            if(n < A.get(mid)) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
-        } else {
-            return index;
         }
+
+        if (right == first && left == second) {
+            if(right + 1 < n) right++;
+            if(left - 1 >= 0) left--;
+        }
+        else if(right == first) {
+            right = first + 1;
+        }
+        else if(left == second) {
+            left = second - 1;
+        }
+
+        return Math.abs(A.get(left) - n) < Math.abs(A.get(right) - n) ? left : right;
     }
 
     //O(N^3)
@@ -107,6 +110,7 @@ public class ThreeSum {
 
     @Test
     public void test() {
-        Assert.assertEquals(2, threeSumClosest(Arrays.asList(1, 2, 3, 1, 0 ), 2));
+        Assert.assertEquals(2, threeSumClosest(Arrays.asList(0,1,1,2,3), 2));
+        Assert.assertEquals(-1, threeSumClosest(Arrays.asList(-5, 1, 4, -7, 10, -7, 0, 7, 3, 0, -2, -5, -3, -6, 4, -7, -8, 0, 4, 9, 4, 1, -8, -6, -6, 0, -9, 5, 3, -9, -5, -9, 6, 3, 8, -10, 1, -2, 2, 1, -9, 2, -3, 9, 9, -10, 0, -9, -2, 7, 0, -4, -3, 1, 6, -3), -1));
     }
 }
