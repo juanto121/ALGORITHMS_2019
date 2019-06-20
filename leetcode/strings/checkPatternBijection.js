@@ -7,6 +7,9 @@ Pattern: "abba", str: "dog cat cat fish" → false
 */
 
 function checkPattern(pattern, string) {
+	const tokens = string.split(" ")
+	if(tokens.length !== pattern.length) return false;
+
 	const matchingMap = {}
 	for(s in pattern) {
 		if(!matchingMap[pattern[s]]) {
@@ -15,8 +18,6 @@ function checkPattern(pattern, string) {
 		matchingMap[pattern[s]].push(s)
 	}
 
-	const tokens = string.split(" ")
-	if(tokens.length !== pattern.length) return false;
 	const seenKeys = {}
 
 	for(key in matchingMap) {
@@ -24,7 +25,7 @@ function checkPattern(pattern, string) {
 
 		if(seenKeys[sample]) return false
 		else seenKeys[sample] = true
-			
+
 		for(position of matchingMap[key]) {
 			if(tokens[position] !== sample){
 				return false
