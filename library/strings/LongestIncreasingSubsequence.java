@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class LongestIncreasingSubsequence {
   public static void main(String[] args) {
-    int a[] = {3,4,-1,5,8,2,3,12,7,9,10}; // LIS : -1, 2, 3, 7, 9, 10
+    int a[] = {2,1,3}; // LIS : -1, 2, 3, 7, 9, 10
 
     LIS2 lis2 = new LIS2(a);
     System.out.println(lis2.lengthOfSubsequence);
@@ -33,7 +33,6 @@ class LIS2 {
     }
     lengthOfSubsequence = longestSequence;
   }
-
 }
 
 // O(log n)
