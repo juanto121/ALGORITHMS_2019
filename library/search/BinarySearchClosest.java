@@ -35,6 +35,7 @@ public class BinarySearchClosest {
         Assert.assertEquals(1, search(new int[]{1,2,3}, 2));
         Assert.assertEquals(0, search(new int[]{1,2,3}, 1));
         Assert.assertEquals(2, search(new int[]{1,2,3}, 3));
+        Assert.assertEquals(0, search(new int[]{0,1,3,6,10,15,21,28,36}, 5));
     }
 
     @Test
